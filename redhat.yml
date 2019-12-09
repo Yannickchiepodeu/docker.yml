@@ -1,0 +1,21 @@
+- name: Add dockeer repository
+  yum_repository:
+      name: dockeer-centos
+      description: docker community repo
+      baseurl: https://Download.docker.com/linux/centos/7/x86_64/stable/
+      state: present
+      gpgcheck: no
+
+- name: install docker
+  become: yes
+  environment: 
+      http_proxy: http://preproxy.uscis.dhs.gov:80/
+      https_proxy: http://preproxy.uscis.dhs.gov:80/      
+  yum:
+      update_cached: yes
+      name: [
+         'docker-ce',
+         'docker-ce-cli',
+         'containerd.io',
+         ] 
+      state: latest
