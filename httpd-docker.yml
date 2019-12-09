@@ -1,17 +1,20 @@
-#Simple ansible playbook1.yml
--
-name: play1
-hosts: localhost
-tasks:
-  - name: execute command 'date'  
-    command: date
-   
-  - name: install httpd service 
-    yum: 
-       name: httpd
-       state: present
-       
-  -name:start web server 
-   server:
-       name: httpd
-       state: started  
+---
+# This is httpd installation as required
+
+- name: install httpd as required
+  become: yes
+  hosts: all
+  
+  tasks:
+    - name: install web service 
+      yum:
+         name: httpd
+         state: present
+
+    - name: start web server 
+      service:
+         name: httpd
+         state: stated  
+     
+
+  

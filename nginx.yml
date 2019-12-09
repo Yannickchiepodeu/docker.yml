@@ -1,0 +1,14 @@
+- name: configuring Nginx
+  become: yes
+  hosts: all
+  
+  tasks:
+   - yum: 
+       name: install Nginx
+       apt: name=nginx state=latest
+    
+       name: Ensure Nginx is running
+      
+   - service:
+       name: nginx
+       state: started
